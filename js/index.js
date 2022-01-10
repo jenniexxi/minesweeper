@@ -26,6 +26,7 @@ function isAvailableIndex(data, col, row) {
     if (col >= data.length || row >= data.length) return false;
 
     return true; // 위의 2개가 아니면 true 로 반환
+    console.log(data, col, row);
 }
 
 // 인덱스 칸 체크(벗어났을 때)
@@ -60,7 +61,7 @@ function setBoard() {
 
     let currentMine = 0; //내가 생성한 지뢰개수
 
-    console.log(arr)
+    // console.log(arr);
 
     // 지뢰를 i,j 에 넣을 건지 while 문에서 생성
     while (true) {
@@ -139,8 +140,8 @@ const LEFT = document.getElementById("left");
 const rightform = document.getElementById("rightform");
 const RIGHT = document.getElementById("right");
 
-leftform.addEventListener('submit', processLeft);
-rightform.addEventListener('submit', processRight);
+// leftform.addEventListener('submit', processLeft);
+// rightform.addEventListener('submit', processRight);
 
 
 function processLeft() {
