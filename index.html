@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 
 <head>
     <meta charset="UTF-8">
@@ -8,45 +8,18 @@
 </head>
 
 <body>
-
-    <div class="gameSet">
-        <input type="text" id="setCol" placeholder="가로" />
-        <input type="text" id="setRow" placeholder="세로" />
-        <input type="text" id="setMine" placeholder="지뢰" />
-        <button type="button" id="startBtn">시작</button>
-    </div>
-    <div class="gameCondition">
-        <div class="">
-            <span class="time" id="timeline">000</span><span class="second">초</span>
-        </div>
-        <div class="">
-            <span class="">깃발 개수 : </span><span class="" id="flagNum"></span>
-        </div>
-        <div class="">
-            <span>찾아야 할 지뢰 개수 : </span><span class="" id="MineNum"></span>
-        </div>
-        <table id="gameboard">
-            <tbody></tbody>
-        </table>
-        <button type="button" id="resetBtn">다시 시작</button>
+    <div id = "status">
+        Board Size <input id = "boardSize" value = "0"</input><br>
+        mineNumber<input id = "mineNumber" value = "0"></input><br>
+        <button id = "start">Game Start</button>
+        <button id = "reset">reset button</button>
     </div>
 
-
-
-    <!-- <form action="get" id="leftform">
-        <span class="title">왼쪽</span>
-        <input type="text" id="left" />
-        <button type="text">입력</button>
-    </form>
-
-    <form action="get" id="rightform">
-        <span class="title">오른쪽</span>
-        <input type="text" id="right" />
-        <button type="text">입력</button>
-    </form> -->
+    <div id = "board"></div>
+    <div id="clock">0</div>
+    <div id="myflag">0</div>
 
     <script src="js/index.js"></script>
-
 </body>
 
 </html>
