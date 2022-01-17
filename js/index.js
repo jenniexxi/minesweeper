@@ -287,8 +287,8 @@ function startGame() {
         return;
     }
 
-    if ((boardSize * boardSize) / 2 <= mineNumber) {
-        alert(`지뢰가 너무 많습니다. ${boardSize * boardSize / 2}보다 작게 설정해주세요.`);
+    if (Math.floor((boardSize * boardSize) / 2) <= mineNumber) {
+        alert(`지뢰가 너무 많습니다. ${Math.floor((boardSize * boardSize) / 2)}보다 작게 설정해주세요.`);
         return;
     }
 
