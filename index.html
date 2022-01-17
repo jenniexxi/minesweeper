@@ -4,20 +4,43 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>지뢰찾기</title>
+    <link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR:100,300,400,500,700,900&amp;subset=korean"
+        rel="stylesheet" />
+    <link href="css/style.css" rel="stylesheet" type="text/css" />
 </head>
 
 <body>
-    <div id = "status">
-        Board Size <input id = "boardSize" value = "0"</input><br>
-        mineNumber<input id = "mineNumber" value = "0"></input><br>
-        <button id = "start">Game Start</button>
-        <button id = "reset">reset button</button>
-    </div>
+    <div class="container">
+        <div id="status" class="status__warpper">
+            <h1 class="status__headline">지뢰 게임</h1>
+            <div class="column">
+                <span class="title">보드 (가로, 세로 동일 / 최대 10) : </span><input type="text" id="boardSize"
+                    class="status__input" value="0" />
+            </div>
+            <div class="column">
+                <span class="title">지뢰 개수 입력 : </span><input type="text" id="mineNumber" class="status__input"
+                    value="0" />
+            </div>
+            <div class="column column__btn">
+                <button type="button" id="start" class="btn">게임 시작</button><button type="button" id="reset"
+                    class="btn">다시
+                    시작</button>
+            </div>
+        </div>
 
-    <div id = "board"></div>
-    <div id="clock">0</div>
-    <div id="myflag">0</div>
+        <div class="board__wrapper">
+            <div class="column">
+                <div class="column__item">
+                    <span class="title">나의 깃발 개수 : </span><span id="myflag" class="flag--num">0</span>
+                </div>
+                <div class="column__item">
+                    <span class="title">시간(초) : </span><span id="clock" class="clock--second">0</span>
+                </div>
+            </div>
+            <div id="board" class="board__create"></div>
+        </div>
+    </div>
 
     <script src="js/index.js"></script>
 </body>

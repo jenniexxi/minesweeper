@@ -7,14 +7,14 @@ let boardSize;
 let timer;
 
 function setBoardValue(data, i, j) {
-    let element = document.getElementById(i+","+j);
+    let element = document.getElementById(i + "," + j);
     switch (data[i][j]) {
         case -1:
             element.textContent = "💣";
             break;
         case 0:
-            element.textContent = "🟨";
-          break;
+            element.textContent = "⬜️";
+            break;
         case 1:
             element.textContent = "1️⃣";
             break;
@@ -23,38 +23,38 @@ function setBoardValue(data, i, j) {
             break;
         case 3:
             element.textContent = "3️⃣";
-          break;
+            break;
         case 4:
             element.textContent = "4️⃣";
-          break;
+            break;
         case 5:
             element.textContent = "5️⃣";
-          break;
+            break;
         case 6:
             element.textContent = "6️⃣";
-          break;
+            break;
         case 7:
             element.textContent = "7️⃣";
-          break;
+            break;
         case 8:
             element.textContent = "8️⃣";
-          break;
+            break;
         default:
             console.log(arr[i][j])
-            // console.error("error");
+        // console.error("error");
     }
 }
 
 function updateBoard() {
-    for(let i = 0; i < boardSize; i++){
-        for( let j =0 ; j < boardSize ; j++){
-            if(checkOpened[i][j] == 1){
-                setBoardValue(arr,i,j);
+    for (let i = 0; i < boardSize; i++) {
+        for (let j = 0; j < boardSize; j++) {
+            if (checkOpened[i][j] == 1) {
+                setBoardValue(arr, i, j);
             } else {
-                if(checkerRight[i][j] == 1) {
-                    document.getElementById(i+","+j).textContent = "🚩";
+                if (checkerRight[i][j] == 1) {
+                    document.getElementById(i + "," + j).textContent = "🚩";
                 } else {
-                    document.getElementById(i+","+j).textContent = "🟪";
+                    document.getElementById(i + "," + j).textContent = "🟪";
                 }
             }
         }
@@ -62,16 +62,16 @@ function updateBoard() {
 }
 
 function makeBoard() {
-    let parent = document.getElementById("board");   
+    let parent = document.getElementById("board");
     let tb = document.createElement("table");
-    tb.setAttribute("id","zzang");
-    for(let i = 0; i < boardSize; i++){
+    tb.setAttribute("id", "zzang");
+    for (let i = 0; i < boardSize; i++) {
         let currentTR = document.createElement("tr");
-        for(let j = 0; j < boardSize; j++){
+        for (let j = 0; j < boardSize; j++) {
             let currentTD = document.createElement("td");
-            currentTD.setAttribute("id",i +"," +j);
+            currentTD.setAttribute("id", i + "," + j);
             currentTD.appendChild(document.createTextNode("🟪")); //innertext
-            currentTR.appendChild(currentTD);       
+            currentTR.appendChild(currentTD);
         }
         tb.appendChild(currentTR);
     }
@@ -116,7 +116,7 @@ function dfs(data, col, row) {
         for (let i = col - 1; i <= col + 1; i++) {
             for (let j = row - 1; j <= row + 1; j++) {
                 if (isAvailableIndex(data, i, j) == false) continue;
-                if(i !== col && j !== row ) continue; // 사방(위, 아래, 오, 왼) 만 확인 : 대각선은 회피 : 대각선만 col, row가 둘 다 바뀜
+                if (i !== col && j !== row) continue; // 사방(위, 아래, 오, 왼) 만 확인 : 대각선은 회피 : 대각선만 col, row가 둘 다 바뀜
                 if (visited[i][j] !== 1) { // 방문안했을 때만 돌아야 하니까
                     visited[i][j] = 1; // 본인꺼 방문했다고 (표시 해당 하는 부분) - 방문 안한 곳 중에서 표시
                     dfs(data, i, j); //빈칸일 때는 계속 돌아줘야 하니까 불러줌
@@ -154,7 +154,7 @@ function setBoard() {
         }
         if (currentMine == mineNumber) break; //지뢰가 다 만들어졌으니까 break
     }
-    
+
     for (let i = 0; i < arr.length; i++) {
         for (let j = 0; j < arr.length; j++) {
             if (arr[i][j] == -1) {
@@ -222,10 +222,10 @@ function processRight(value) {
     for (let i = 0; i < arr.length; i++) {
         for (let j = 0; j < arr.length; j++) {
             if (checkerRight[i][j] == 1 && arr[i][j] !== -1) {
-                return ;
+                return;
             }
-            if (checkerRight[i][j] == 0  && arr[i][j] == -1) {
-                return ;
+            if (checkerRight[i][j] == 0 && arr[i][j] == -1) {
+                return;
             }
         }
     }
@@ -236,8 +236,8 @@ function processRight(value) {
     alert("게임 종료. 축하!");
 }
 
-function clickLeftBoard (){
-    if(event.button == 0){ //왼쪽 버튼
+function clickLeftBoard() {
+    if (event.button == 0) { //왼쪽 버튼
         processLeft(this.id);
         updateBoard();
     }
@@ -245,13 +245,13 @@ function clickLeftBoard (){
 
 function resetInputValue() {
     let divMineNumber = document.getElementById("mineNumber");
-    let divBoardSize =  document.getElementById("boardSize");
+    let divBoardSize = document.getElementById("boardSize");
 
     divMineNumber.value = 0;
     divBoardSize.value = 0;
 
     let parent = document.getElementById("board");
-    if(parent.childNodes.length !== 0) {
+    if (parent.childNodes.length !== 0) {
         parent.removeChild(parent.firstChild);
     }
 
@@ -269,25 +269,25 @@ function resetInputValue() {
 
 function startGame() {
     let divMineNumber = document.getElementById("mineNumber");
-    let divBoardSize =  document.getElementById("boardSize");
+    let divBoardSize = document.getElementById("boardSize");
     let start = document.getElementById("start");
 
     mineNumber = parseInt(divMineNumber.value);
-    boardSize = parseInt(divBoardSize.value);  
+    boardSize = parseInt(divBoardSize.value);
 
-    if(mineNumber <= 0 || boardSize <= 0) {
+    if (mineNumber <= 0 || boardSize <= 0) {
         alert("보드값과 지뢰값은 1이상부터 입력해주세요.");
         resetInputValue();
         return;
     }
 
-    if(boardSize > 11) {
+    if (boardSize > 11) {
         alert("보드판은 10까지만 가능합니다.");
         resetInputValue();
         return;
     }
 
-    if((boardSize * boardSize) / 2 <= mineNumber ) {
+    if ((boardSize * boardSize) / 2 <= mineNumber) {
         alert(`지뢰가 너무 많습니다. ${boardSize * boardSize / 2}보다 작게 설정해주세요.`);
         return;
     }
@@ -295,12 +295,12 @@ function startGame() {
     setBoard();
     makeBoard();
     console.table(arr);
-     
+
     divMineNumber.disabled = true; //게임 시작하고 더이상 수정 안되도록 지뢰개수
     divBoardSize.disabled = true;
     start.disabled = true;
 
-    timer = setInterval(function() {
+    timer = setInterval(function () {
         const clock = document.getElementById("clock");
         clock.innerText = parseInt(clock.innerText) + 1;
     }, 1000);
@@ -309,12 +309,12 @@ function startGame() {
     document.querySelectorAll('#zzang td').forEach(e => e.addEventListener("contextmenu", checkMine));
 }
 
-function checkMine (ev) {
+function checkMine(ev) {
     processRight(this.id);
     ev.preventDefault();
     return false;
 }
 
 //Event
-document.querySelector("#start").addEventListener("click",startGame);
-document.querySelector("#reset").addEventListener("click",resetInputValue);
+document.querySelector("#start").addEventListener("click", startGame);
+document.querySelector("#reset").addEventListener("click", resetInputValue);
