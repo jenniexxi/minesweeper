@@ -190,7 +190,7 @@ function processLeft(value) {
     if (arr[x][y] >= 1) { //여긴 무조건 숫자 0: 빈칸, 1: 숫자, -1: 지뢰
         checkOpened[x][y] = 1; //누른거 보여주기 //chekcker에서 판단하고 arr에서 보여준다
     } else if (arr[x][y] == -1) {
-        //모달창 활용해서 retry 하면 게임 다시시작하게 하면 좋을듯   
+        //모달창 활용해서 retry 하면 게임 다시시작하게 하면 좋을듯
         //지뢰 밟으면 모든 다 오픈
         checkOpened = Array.from(Array(boardSize), () => Array(boardSize).fill(1))
         updateBoard();
@@ -223,6 +223,9 @@ function processRight(value) {
         for (let j = 0; j < arr.length; j++) {
             if (checkerRight[i][j] == 1 && arr[i][j] !== -1) {
                 return;
+                // 깃발을 꽂았는데 폭탄이 아니면 processRight를 종료해야 한다.
+                // 밑에를 보면 지뢰를 다 찾아서 깃발을 꽂았을 때 종료되기 때문에 
+                // if 문은 다 찾았을 때가 아닐 때를 말한다.
             }
             if (checkerRight[i][j] == 0 && arr[i][j] == -1) {
                 return;
