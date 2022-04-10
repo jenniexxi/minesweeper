@@ -1,0 +1,78 @@
+property는 순서대로 되네... 내가 잘못찾은것 같고
+아래대로 답하면 될것같아. 둘다 표준을 찾아봤네... stack overflow에 낚임
+이건 자바스크립트 표준에 명시되있네
+레퍼런스 : https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Operators/this
+순서대로 설정된다는 부분: https://262.ecma-international.org/5.1/#sec-11.1.5
+
+[져니] [오후 2:14] AUTOCHANGE: {
+            ELEM: {
+                __STICKYIN: document.querySelectorAll('.vd-sticky-copy .vd-sticky-in'),
+                __STICKYEND: document.querySelectorAll(`.vd-sticky-copy [class^=vd-qled][class$=end]`),
+                __STICKYENDHEIGHT: __STICKYEND.offsetHeight,
+            },
+
+[져니] [오후 2:14] __STICKYENDHEIGHT: __STICKYEND.offsetHeight,
+[져니] [오후 2:14] 이렇게 쓰면 왜 안되는지 이유 찾아오래,,,
+
+
+
+Answer)
+왜 객체에서 참조가 안되는가?
+=> 
+     일단 객체 내부이므로 서로 다른 property를 참조하기 위해선 this keyword가 사용되어야 합니다.
+     하지만 this를 사용해도 여전히..... 에러가 납니다 this가 undefined입니다(_STICKYENDHEIGHT: this.__STICKYEND.offsetHeight)
+     object literal의 특성 입니다. 보통 객체간 참조를 위해 this를 많이 사용 합니다.
+     그리고 이 this라는 것은, caller를 가르키게 됩니다. 다른말로 "dot syntax" 예를들면 A.B와 같은 형태로 존재해야 됩니다.
+     이런경우 this는 A를 가르킵니다.
+     따라서 dot syntax를 사용하지 않는, 경우 this가 정의되지 않으므로 불가능 합니다.
+
+
+몇가지 예를 들어보면
+exaple 1) user는 함수 형태를 띄고 이 함수는 dot syntax문법에 의해 호출되지 않으므로 this는 undefined입니다.
+function makeUser() {
+  return {
+    name: "John",
+    ref: this
+  };
+}
+
+let user = makeUser();
+alert( user.ref.name ); // Error: Cannot read property 'name' of undefined
+
+
+example 2) 같은 의미로 아래도 this는 undefined 입니다.
+function makeUser(){
+  return this; // this time there's no object literal
+}
+
+alert( makeUser().name ); // Error: Cannot read property 'name' of undefined
+
+
+
+하지만 아래의 경우엔 됩니다.
+  => user.ref()는 함수가 아닌 method이기 때문입니다. (object literal내 함수)
+function makeUser() {
+  return {
+    name: "John",
+    ref() {
+        
+      aaa() {
+
+          return this;
+      }
+    }
+  };
+}
+     
+
+let user = makeUser();
+alert( user.ref().name ); // John
+
+
+저희 코드도 아래와 같이 변경된다면 동작할것입니다.
+[져니] [오후 2:14] AUTOCHANGE: {
+            ELEM: {
+                __STICKYIN: document.querySelectorAll('.vd-sticky-copy .vd-sticky-in'),
+                __STICKYEND: document.querySelectorAll(`.vd-sticky-copy [class^=vd-qled][class$=end]`),
+                __STICKYENDHEIGHT:  function(){ this.__STICKYEND.offsetHeight};
+            },
